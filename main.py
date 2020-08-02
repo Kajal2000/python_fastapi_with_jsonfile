@@ -54,3 +54,20 @@ async def create_item(id : int ,item: Item):
         print(data_lode)
         with open("main.json", "w") as outfile: 
             json.dump(data_lode, outfile) 
+
+
+# Delete the data from json file
+@app.delete("/items/{id}")
+async def create_item(id : int ,item: Item):
+    with open("main.json","r") as file:
+        read_data = file.read()
+        data_lode = json.loads(read_data)
+        i = 0
+        while i <len(data_lode):
+            if data_lode[i]["id"] == id:
+                data_lode.pop(id-1)
+                break
+            i = i + 1
+        with open("main.json", "w") as outfile: 
+            json.dump(data_lode, outfile) 
+        
